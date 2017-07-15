@@ -11,9 +11,11 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
+                    @if(Auth::guest())
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name') }}
                     </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -23,6 +25,7 @@
                     </ul>
                         @if(!Auth::guest())
                               <ul class="nav navbar-nav">
+                                <li><a href="/home">Home</a></li>
                                 <li><a href="/posts">Blogs</a></li>
                                 <li><a href="/services">Services</a></li>
                                 <li><a href="/about">About</a></li>
@@ -38,7 +41,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name . ' ' . Auth::user()->lname }}  <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">

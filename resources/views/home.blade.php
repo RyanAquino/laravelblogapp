@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
+@section('title', ' | Home')
+
 @section('content')
 <div class="container">
+    <div class="jumbotron text-center">
+        <h1>Welcome {{ Auth::user()->name . ' ' . Auth::user()->lname }} !</h1>
+    </div>
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

@@ -29,7 +29,7 @@ class PostsController extends Controller
             // $posts =  Post::all();
 
         //pagination paginate(1) means it contains n per page
-        $posts =  Post::orderBy('created_at','desc')->paginate(2);
+        $posts =  Post::orderBy('created_at','desc')->paginate(5);
         return view ('posts.index')->with('posts',$posts);
     }
 
