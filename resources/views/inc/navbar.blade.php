@@ -25,7 +25,7 @@
                     </ul>
                         @if(!Auth::guest())
                               <ul class="nav navbar-nav">
-                                <li><a href="/home">Home</a></li>
+                                <li class = "{{ Request::is('/home') ? 'active' : null}}"><a href="/home">Home</a></li>
                                 <li><a href="/posts">Blogs</a></li>
                                 <li><a href="/services">Services</a></li>
                                 <li><a href="/about">About</a></li>
