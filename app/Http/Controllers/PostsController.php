@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Post;
 use Auth;
-
+use File;
 class PostsController extends Controller
 {
     /**
@@ -175,7 +175,7 @@ class PostsController extends Controller
 
         if ($post->cover_image != 'no_image.jpg') {
             //delete the image
-            Storage::delete('public/cover_images/' . $post->cover_image);
+            File::delete('cover_images/' . $post->cover_image);
         }
         
         $post->delete();
