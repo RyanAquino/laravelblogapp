@@ -25,15 +25,15 @@
                     </ul>
                         @if(!Auth::guest())
                               <ul class="nav navbar-nav">
-                                <li class = "{{ Request::is('/home') ? 'active' : null}}"><a href="/home">Home</a></li>
-                                <li><a href="/posts">Blogs</a></li>
-                                <li><a href="/services">Services</a></li>
-                                <li><a href="/about">About</a></li>
+                                <li class="{{ Request::is('home') ? 'active': '' }}"><a href="/home">Home</a></li>
+                                <li class="{{ Request::is('posts') ? 'active': '' }}"><a href="/posts">Blogs</a></li>
+                                <li class="{{ Request::is('services') ? 'active': '' }}"><a href="/services">Services</a></li>
+                                <li class="{{ Request::is('about') ? 'active': '' }}"><a href="/about">About</a></li>
                               </ul>
                         @endif
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right"> 
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>

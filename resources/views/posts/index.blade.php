@@ -11,7 +11,7 @@
 			<div class="well">
 			<div class="row">
 				<div class="col-md-4 col-sm-4">
-					<img width="300" height="200" src="/cover_images/{{$post->cover_image}}">
+					<img src="/cover_images/{{$post->cover_image}}" class='img-thumbnail img-fluid'>
 				</div>
 				<div class="col-md-8 col-sm-8">
 				<h3><a href="posts/{{$post->id}}">{{$post->title}}</a></h3>
