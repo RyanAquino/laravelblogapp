@@ -23,6 +23,7 @@ Route::get('/messages', 'ChatController@showChat');
 // Route::post('/messages', 'ChatController@postMsg');
 
 Route::post('/messages', function(){
+	
 	$user = Auth::user();
 
 	$message = $user->messages()->create([

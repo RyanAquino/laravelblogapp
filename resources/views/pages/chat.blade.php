@@ -3,12 +3,17 @@
 
 @section('chat')
 	<div id="app">
-	<h1>This is  the Chat Room</h1>
-	<div class="panel-heading">
-		<span class="badge pull-right">Online Users: @{{ usersInRoom.length }}</span>
+	<h1>Chat Room</h1>
+
+  <div class="row">
+      <div class="col-lg-6">
+      <span class="label label-success pull-right">Online: @{{ usersInRoom.length }}</span>
+      <hr>
+    <div class = "jumbotron">
+	  <chat-log :messages='messages'></chat-log>
 	</div>
-	
-	<chat-log :messages='messages'></chat-log>
-	<chat-composer current-user="{{ Auth::user()->name . ' ' . Auth::user()->lname }}" v-on:messagesent='addMessage'></chat-composer>
+	  <chat-composer current-user="{{ Auth::user()->name . ' ' . Auth::user()->lname }}" v-on:messagesent='addMessage'></chat-composer>
+	  </div>
+  </div>
 	</div>
 @endsection
