@@ -19,7 +19,7 @@
     	<div class="container">
         @include('inc.messages')
         	@yield('content')
-			@yield('services')
+			@yield('chat')
 			@yield('index')
 			@yield('posts')
 			@yield('showPost')
@@ -33,5 +33,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
      @yield('scripts')
+     
 </body>
 </html>

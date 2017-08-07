@@ -16,7 +16,57 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('chat-message', require('./components/ChatMessage.vue'));
+Vue.component('chat-log', require('./components/ChatLog.vue'));
+Vue.component('chat-composer', require('./components/ChatComposer.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data:{
+    	messages:[],
+        usersInRoom: []
+    },
+
+    methods:{
+    	addMessage(message) {
+    		//Add message
+    		this.messages.push(message);
+
+            //persist message
+            axios.post('/messages', message).then(response=>{
+            
+            });
+
+    	}
+    },
+    created(){
+        axios.get('/messages').then(response=>{
+            this.messages = response.data;
+        });
+
+        //error here ** console **
+        Echo.join('chatroom')
+
+            .here((users)=>{
+                this.usersInRoom = users;
+            })
+            .joining((user)=>{
+                    this.usersInRoom.push(user);
+            })
+
+            .leaving((user)=>{
+                    this.usersInRoom = this.usersInRoom.filter(u => u != user);
+            })
+
+            .listen('MessagePosted',(e) => {
+                //Handle event
+                this.messages.push({
+                    message: e.message.message,
+                    user: e.user
+                })
+                // console.log(e);
+
+            })
+
+    }
 });

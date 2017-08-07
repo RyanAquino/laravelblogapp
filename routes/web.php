@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessagePosted;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +17,22 @@
 // });
 
 Route::get('/about', 'PagesController@aboutIndex');
-Route::get('/services', 'PagesController@servicesIndex');
+Route::get('/chat', 'ChatController@index');
+Route::get('/messages', 'ChatController@showChat');
+
+// Route::post('/messages', 'ChatController@postMsg');
+
+Route::post('/messages', function(){
+	$user = Auth::user();
+
+	$message = $user->messages()->create([
+	    'message' => request()->get('message')
+	]);
+
+	//Announce new message has been posted
+	broadcast(new MessagePosted($message, $user))->toOthers();
+});
+
 Route::get('/', 'PagesController@index');
 
 // resource controller CRUD
