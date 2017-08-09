@@ -1,9 +1,12 @@
 @extends('layouts.app')
+@section('title', ' | Post')
 
 @section('showPost')
 	<h1>{{$post->title}}</h1>
 		<hr>
+	<div class="jumbotron">
 	<p>{!!$post->body!!}</p>
+	</div>
 	<hr>
 	<small>Written on {{$post->created_at}}  by {{$post->user->name}}</small>
 	<hr>

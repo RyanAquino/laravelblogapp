@@ -16,11 +16,13 @@ use App\Events\MessagePosted;
 //     return view('welcome');
 // });
 
+Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@aboutIndex');
+
+//chat and messages
 Route::get('/chat', 'ChatController@index');
 Route::get('/messages', 'ChatController@showChat');
-
-// Route::post('/messages', 'ChatController@postMsg');
+	// Route::post('/messages', 'ChatController@postMsg'); **not working **
 
 Route::post('/messages', function(){
 	
@@ -34,12 +36,23 @@ Route::post('/messages', function(){
 	broadcast(new MessagePosted($message, $user))->toOthers();
 });
 
-Route::get('/', 'PagesController@index');
-
-// resource controller CRUD
+// CRUD for Blog posting
 Route::resource('posts', 'PostsController');
 
+//Authentication login
 Auth::routes();
 
 // Dashboard of user
 Route::get('/home', 'HomeController@index')->name('home');
+
+//PROFILE
+Route::prefix('profile')->group(function () {
+	// Page
+Route::get('/', 'ProfileController@index')->name('profile');
+	// Edit 
+Route::get('/edit', 'ProfileController@editProfile');
+Route::patch('/edit','ProfileController@update');
+	// Change Password
+Route::get('/change_password', 'ProfileController@passwordIndex');
+Route::patch('/change_password', 'ProfileController@changePassword');
+});

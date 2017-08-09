@@ -11,9 +11,10 @@
       <hr>
     <div class = "jumbotron">
 	  <chat-log :messages='messages'></chat-log>
-	</div>
+	</div>	
 	  <chat-composer current-user="{{ Auth::user()->name . ' ' . Auth::user()->lname }}" v-on:messagesent='addMessage'></chat-composer>
 	  </div>
+
   </div>
 	</div>
 @endsection

@@ -25,7 +25,9 @@
                     </ul>
                         @if(!Auth::guest())
                               <ul class="nav navbar-nav">
-                                <li class="{{ Request::is('home') ? 'active': '' }}"><a href="/home">Home</a></li>
+                                <li class="{{ Request::is('home') ? 'active': '' }}"><a href="/home">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                Home</a></li>
                                 <li class="{{ Request::is('posts') ? 'active': '' }}"><a href="/posts">Blogs</a></li>
                                 <li class="{{ Request::is('chat') ? 'active': '' }}"><a href="/chat">Chat Room</a></li>
                                 <li class="{{ Request::is('about') ? 'active': '' }}"><a href="/about">About</a></li>
@@ -41,14 +43,23 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name . ' ' . Auth::user()->lname }}  <span class="caret"></span>
+                                    {{ Auth::user()->name . ' ' . Auth::user()->lname }}  
+                                    <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                <li>
+                                <a href="{{ route('profile') }}">
+                                   <i class="fa fa-user" aria-hidden="true"></i>
+                                   Profile
+                                </a>
+                                </li>
                                     <li>
+
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             Logout
                                         </a>
 

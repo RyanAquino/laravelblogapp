@@ -12,7 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- font awesome -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- custom styles -->
+    @yield('css') 
 </head>
 <body>
     <div id="app">
@@ -31,7 +34,6 @@
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-     @yield('scripts')
-     
+    @yield('scripts') 
 </body>
 </html>

@@ -1,0 +1,15 @@
+#profileImage{
+  height: 150px;
+  width: 150px;
+  float: left;
+  border-radius: 50%;
+}
+
+#cover_image{
+  height: 250px;
+  width: 250px;
+}
+
+/*html body {
+	background-color: red;
+}*/

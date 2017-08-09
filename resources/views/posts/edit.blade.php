@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' | Edit Post')
 
 @section('edit')
 <h1>Edit Post</h1>
@@ -13,11 +14,20 @@
    		{{Form::label('body' ,'Body')}}
    		{{Form::textarea('body' ,$post->body,['id' => 'article-ckeditor' ,'class' => 'form-control', 'placeholder' => 'Body text'])}}
    </div>   
-      <div class="form-group">
+   
+   <div class="form-group">
          {{Form::file('cover_image')}}
    </div>
+
    {{Form::hidden('_method', 'PUT')}}
    {{Form::submit('Submit',['class' => 'btn btn-primary'])}}
-{!! Form::close() !!}
+   {!! Form::close() !!}
+   
+@endsection
 
+@section ('scripts')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
 @endsection

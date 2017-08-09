@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' | Create Post')
 
 @section('create')
 <h1>Create Post</h1>
