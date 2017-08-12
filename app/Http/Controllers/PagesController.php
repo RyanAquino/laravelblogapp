@@ -3,24 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class PagesController extends Controller
-{
-
+{   
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
     
     public function index(){
-    	return view ('pages.index');
-    }
-
-    public function aboutIndex(){
-    	return view ('pages.about');
-    }
-
-    public function servicesIndex(){
-    	$data = array(
-    		'services' => ['Service 1', 'Service 2', 'Service 3']
-    		);
-    return view ('pages.services')->with($data);
+         return view ('pages.index');
     }
 
 }

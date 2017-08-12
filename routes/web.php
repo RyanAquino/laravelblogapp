@@ -12,18 +12,20 @@ use App\Events\MessagePosted;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//MIDDLEWARE FOR BACK BUTTON
+Route::middleware(['revalidate'])->group(function(){
 
 Route::get('/', 'PagesController@index');
-Route::get('/about', 'PagesController@aboutIndex');
+//temporary closure / replace with new controller 
+Route::get('/about', function(){
+	return view ('pages.about');
+});
 
 //chat and messages
 Route::get('/chat', 'ChatController@index');
 Route::get('/messages', 'ChatController@showChat');
-	// Route::post('/messages', 'ChatController@postMsg'); **not working **
 
+	// Route::post('/messages', 'ChatController@postMsg'); **not working **
 Route::post('/messages', function(){
 	
 	$user = Auth::user();
@@ -56,3 +58,8 @@ Route::patch('/edit','ProfileController@update');
 Route::get('/change_password', 'ProfileController@passwordIndex');
 Route::patch('/change_password', 'ProfileController@changePassword');
 });
+//END OF PROFILE
+
+});
+
+

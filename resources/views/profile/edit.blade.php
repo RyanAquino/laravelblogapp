@@ -9,11 +9,11 @@
 {!! Form::open(['action' => ['ProfileController@update'], 'method' => 'PATCH']) !!}
    <div class="form-group">
    		{{Form::label('fname' ,'First Name')}}
-   		{{Form::text('fname' ,Auth::user()->name,['class' => 'form-control'])}}
+   		{{Form::text('fname' ,Auth::user()->name,['class' => 'form-control', 'required' => ''])}}
    </div>
    <div class="form-group">
    		{{Form::label('lname' ,'Last Name')}}
-   		{{Form::text('lname' ,Auth::user()->lname,['class' => 'form-control'])}}
+   		{{Form::text('lname' ,Auth::user()->lname,['class' => 'form-control','required' => ''])}}
    </div>
    <div class="form-group">
    		{{Form::label('email' ,'Email Address')}}

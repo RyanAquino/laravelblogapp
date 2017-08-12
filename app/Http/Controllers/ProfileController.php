@@ -36,8 +36,7 @@ class ProfileController extends Controller
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
         ]);
-
-
+        
         //update profile
         $user = User::find(Auth::user()->id);
         $user->name =$request->input('fname');
