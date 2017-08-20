@@ -8,6 +8,7 @@
 
 @section('posts')
 	<h1>Posts</h1>
+	<hr>
 	<a href="/posts/create">Create a Post</a>
 		@if(count($posts) > 0)
 
@@ -20,7 +21,10 @@
 				<div class="col-md-8 col-sm-8">
 				<h3><a href="posts/{{$post->id}}">{{$post->title}}</a></h3>
 				<p>{!! substr($post->body,0,50) !!}{{ strlen(strip_tags($post->body)) > 50 ? '...': ''}}</p>
-				<small>Written on {{$post->created_at}} by {{$post->user->name . ' ' . $post->user->lname}}</small>
+
+				<small>
+				Posted in: <b>{{$post->category->name}} </b><br>
+				Written on {{$post->created_at}} by {{$post->user->name . ' ' . $post->user->lname}}</small>
 				</div>
 			</div>
 			</div>

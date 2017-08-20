@@ -47001,7 +47001,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "chat-message"
   }, [_c('p', {
     staticClass: "lead"
-  }, [_vm._v(_vm._s(_vm.message.message))]), _vm._v(" "), _c('small', [_vm._v("by " + _vm._s(_vm.message.user.name))]), _vm._v(" "), _c('hr', {
+  }, [_vm._v(_vm._s(_vm.message.message))]), _vm._v(" "), _c('small', [_vm._v("by " + _vm._s(_vm.message.user.name + ' '))]), _vm._v(" "), _c('hr', {
     attrs: {
       "id": "chatLog"
     }

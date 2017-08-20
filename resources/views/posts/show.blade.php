@@ -3,11 +3,12 @@
 
 @section('showPost')
 	<h1>{{$post->title}}</h1>
+	<p>Posted in: {{$post->category->name}}</p>
 		<hr>
 	<div class="jumbotron">
 	<p>{!!$post->body!!}</p>
 	</div>
-	<hr>
+
 	<small>Written on {{$post->created_at}}  by {{$post->user->name}}</small>
 	<hr>
 	@if(Auth::user()->id == $post->user_id)

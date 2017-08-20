@@ -23,7 +23,7 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
-                        @if(!Auth::guest())
+                        @if(Auth::check())
                               <ul class="nav navbar-nav">
                                 <li class="{{ Request::is('home') ? 'active': '' }}"><a href="/home">
                                 <i class="fa fa-home" aria-hidden="true"></i>

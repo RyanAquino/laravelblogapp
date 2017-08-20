@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use Auth;
 use File;
 class PostsController extends Controller
@@ -42,7 +43,8 @@ class PostsController extends Controller
     public function create()
     {
         //
-        return view ('posts.create');
+        $categories = Category::all();
+        return view ('posts.create')->with('categories', $categories);
     }
 
     /**
@@ -57,6 +59,7 @@ class PostsController extends Controller
         $this->validate($request,[
             'title' => 'required',
             'body' => 'required',
+            'category' =>'required|integer',
             'cover_image' => 'image|nullable|max:1999'
             ]);
 
@@ -82,6 +85,7 @@ class PostsController extends Controller
         $post->body =$request->input('body');
         $post->user_id = auth()->user()->id;
         $post->cover_image = $fileNameToStore;
+        $post->category_id = $request->input('category');
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Created');
@@ -109,11 +113,16 @@ class PostsController extends Controller
     {
         //
         $post = Post::find($id);
+        $categories = Category::all();
+        $cats = [];
+        foreach ($categories as $category) {
+            $cats[$category->id] =$category->name;
+        }
         //check for correct user
         if(auth()->user()->id != $post->user_id){
             return redirect('/posts')->with('error', 'Unauthorized page');
         }
-        return view ('posts.edit')->with('post', $post);
+        return view ('posts.edit')->with('post', $post)->with('categories',$cats);
     }
 
     /**
@@ -129,6 +138,7 @@ class PostsController extends Controller
                 //validate
         $this->validate($request,[
             'title' => 'required',
+            'category' => 'required|integer',
             'body' => 'required'
             ]);
 
@@ -148,6 +158,7 @@ class PostsController extends Controller
         //Create Post
         $post = Post::find($id);
         $post->title =$request->input('title');
+        $post->category_id =$request->input('category');
         $post->body =$request->input('body');
         if ($request->hasFile('cover_image')) {
         $post->cover_image =$fileNameToStore;

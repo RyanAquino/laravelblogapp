@@ -10,6 +10,15 @@
    		{{Form::text('title' ,'',['class' => 'form-control', 'placeholder' => 'Title'])}}
    </div>
 
+   <div class="form-group"> 
+      <select class="form-control" name="category">  
+      <option value="" class="selected">Select Category</option>
+      @foreach($categories as $category)
+     <option value="{{$category->id}}">{{$category->name}}</option>
+      @endforeach
+    </select> 
+   </div>
+
    <div class="form-group">
    		{{Form::label('body' ,'Body')}}
    		{{Form::textarea('body' ,'',['id' => 'article-ckeditor' ,'class' => 'form-control', 'placeholder' => 'Body text'])}}

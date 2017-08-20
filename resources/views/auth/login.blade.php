@@ -53,6 +53,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
                                     Login
                                 </button>
 
