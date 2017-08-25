@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Post;
@@ -75,6 +75,7 @@ class PostsController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //upload image
             $path = $request->file('cover_image')->move('cover_images', $fileNameToStore);
+            Cloudder::upload("cover_images/" . $fileNameToStore,$fileNameToStore);
         }else{
             $fileNameToStore = 'no_image.jpg';
         }
@@ -84,8 +85,8 @@ class PostsController extends Controller
         $post->title =$request->input('title');
         $post->body =$request->input('body');
         $post->user_id = auth()->user()->id;
-        $post->cover_image = $fileNameToStore;
         $post->category_id = $request->input('category');
+        $post->cover_image = $fileNameToStore;
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Created');
@@ -152,18 +153,26 @@ class PostsController extends Controller
             //filename to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //upload image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+            $path = $request->file('cover_image')->move('cover_images', $fileNameToStore);
         }
 
-        //Create Post
+        //Update Post
         $post = Post::find($id);
         $post->title =$request->input('title');
         $post->category_id =$request->input('category');
         $post->body =$request->input('body');
         if ($request->hasFile('cover_image')) {
-        $post->cover_image =$fileNameToStore;
+            //delete old image
+        if ($post->cover_image != 'no_image.jpg') {
+            Cloudder::destroyImage($post->cover_image);
+            Cloudder::delete($post->cover_image);    
+        }
+            //upload new image
+            $post->cover_image =$fileNameToStore; 
+            Cloudder::upload("cover_images/" . $fileNameToStore,$fileNameToStore);
         }
         $post->save();
+
 
         return redirect('/posts')->with('success', 'Post Updated');
     
@@ -187,9 +196,12 @@ class PostsController extends Controller
         if ($post->cover_image != 'no_image.jpg') {
             //delete the image
             File::delete('cover_images/' . $post->cover_image);
+            Cloudder::destroyImage($post->cover_image);
+            Cloudder::delete($post->cover_image);
         }
         
         $post->delete();
+
          return redirect('/home')->with('success', 'Post Remove');
 
 

@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('category_id');
             $table->string('title');
             $table->mediumText('body');
-            $table->string('cover_image');
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }
