@@ -24,7 +24,7 @@
 
 				<small>
 				Posted in: <b>{{$post->category->name}} </b><br>
-				Written on {{$post->created_at}} by {{$post->user->name . ' ' . $post->user->lname}}</small>
+				Posted by {{$post->user->name . ' ' . $post->user->lname}} on {{$post->created_at->toFormattedDateString()}}</small>
 				</div>
 			</div>
 			</div>

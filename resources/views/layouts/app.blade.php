@@ -23,6 +23,7 @@
     	<div class="container">
         @include('inc.messages')
         	@yield('content')
+            @yield('editComment')
 			@yield('chat')
 			@yield('index')
 			@yield('posts')

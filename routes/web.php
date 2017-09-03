@@ -60,6 +60,20 @@ Route::patch('/change_password', 'ProfileController@changePassword');
 });
 //END OF PROFILE
 
+//COMMENTS
+Route::prefix('comments')->group(function(){
+	//ADD
+Route::post('/{post_id}', 'CommentsController@store');
+	//EDIT
+Route::get('/{id}/edit', 'CommentsController@edit');
+Route::put('/{id}','CommentsController@update');
+	//DELETE
+Route::get('/{id}/delete','CommentsController@delete');
+Route::delete('/{id}','CommentsController@destroy');
+
+});
+
+
 });
 
 
