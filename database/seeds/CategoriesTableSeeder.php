@@ -37,5 +37,9 @@ class CategoriesTableSeeder extends Seeder
         $category->name = 'Social';
         $category->save();
 
+        $category = new Category;
+        $category->name = 'Others';
+        $category->save();
+
     }
 }

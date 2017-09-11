@@ -2,6 +2,7 @@
 @section('title', ' | Edit Post')
 
 @section('edit')
+  <a href='{{url()->previous()}}'class="btn btn-default" type="button"> << Back</a>  
 <h1>Edit Post</h1>
 
 {!! Form::open(['action' => ['PostsController@update', $post->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
@@ -35,13 +35,41 @@ class ProfileController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
+            'avatar' => 'image|nullable|max:5000'
         ]);
-        
+
+        //handle profile upload
+        if ($request->hasFile('avatar')) {
+            //get filename with extension
+            $filenameWithExt = $request->file('avatar')->getClientOriginalName();;
+            //get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            //filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload image
+            $path = $request->file('avatar')->move('avatars', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'default.png';
+        }
+
         //update profile
         $user = User::find(Auth::user()->id);
         $user->name =$request->input('fname');
         $user->lname =$request->input('lname');
         $user->email =$request->input('email');
+
+        if ($request->hasFile('avatar')) {
+            //delete old image
+        if ($user->avatar != 'default.png') {
+            Cloudder::destroyImage('avatars/'. $user->avatar);
+            Cloudder::delete('avatars/' . $user->avatar);    
+        }
+            //upload new image
+            $user->avatar = $fileNameToStore;
+            Cloudder::upload("avatars/" . $fileNameToStore,$fileNameToStore,['folder' => 'avatars']);
+        }
         $user->save();
 
         return redirect('/profile')->with('success', 'Profile Updated!');

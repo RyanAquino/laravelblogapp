@@ -9,7 +9,7 @@
 @section('content')
 <h1>{{Auth::user()->name . ' ' . Auth::user()->lname}}'s Profile</h1>
 
-<img src="/avatars/default.png" alt="" id="profileImage">
+<img src="{{ Cloudder::show('avatars/' . Auth::user()->avatar)}}" alt="Profile Picture" id="profileImage">
 
 <img src="" alt="">
 <label for="">First Name</label>: {{Auth::user()->name}} <br>

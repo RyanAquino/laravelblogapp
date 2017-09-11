@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 use JD\Cloudder\Facades\Cloudder;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use Auth;
 use File;
+use Purifier;
 class PostsController extends Controller
 {
     /**
@@ -83,7 +83,7 @@ class PostsController extends Controller
         //Create Post
         $post = new Post;
         $post->title =$request->input('title');
-        $post->body =$request->input('body');
+        $post->body =Purifier::clean($request->input('body'));
         $post->user_id = auth()->user()->id;
         $post->category_id = $request->input('category');
         $post->cover_image = $fileNameToStore;
@@ -160,7 +160,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->title =$request->input('title');
         $post->category_id =$request->input('category');
-        $post->body =$request->input('body');
+        $post->body =Purifier::clean($request->input('body'));
         if ($request->hasFile('cover_image')) {
             //delete old image
         if ($post->cover_image != 'no_image.jpg') {

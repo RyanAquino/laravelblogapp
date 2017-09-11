@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Comment;
 use App\Post;
 use Auth;
+use Purifier;
 class CommentsController extends Controller
 {
     /**
@@ -38,7 +39,7 @@ class CommentsController extends Controller
         $comment->user_id = Auth::user()->id;
         $comment->post()->associate($post);
         $comment->name = $fullname;
-        $comment->comment = $request->input('comment');
+        $comment->comment = Purifier::clean($request->input('comment'));
         $comment->save();
 
         return back()->with('success', 'Comment Added');
@@ -73,18 +74,11 @@ class CommentsController extends Controller
         ]);
 
         $comment = Comment::find($id);
-        $comment->comment = $request->input('comment');
+        $comment->comment = Purifier::clean($request->input('comment'));
         $comment->save();
 
         return redirect()->route('posts.show',$comment->post->id)->with('success', 'Comment Updated');
 
-    }
-
-    public function delete($id)
-    {
-        //
-        $comment = Comment::find($id);
-        return view ('comments.delete')->with('comment',$comment);
     }
 
     /**

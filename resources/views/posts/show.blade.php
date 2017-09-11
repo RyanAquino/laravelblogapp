@@ -15,16 +15,13 @@
 	</div>
 	
 	@if(Auth::user()->id == $post->user_id)
-	<a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+		<a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+		<button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#deletePost">Delete</button>
+ 		@include('modals.deletePost')
+	@endif
+
 
 	
-	{!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST','class' => 'pull-right'])!!}
-
-	{{Form::hidden('_method' , 'DELETE')}}
-	{{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-
-	{!!Form::close()!!}
-	@endif
 	<div class="row">
 	<div class="col-lg-6">
 		<h4>Comments:</h4>
@@ -36,12 +33,13 @@
 			<li class="list-group-item">
 				{!!$comment->comment!!} <br>
 				<b>{{$comment->name}}</b> 
-				<small>{{$comment->created_at->diffForHumans()}}</small>
+				<small>{{$comment->updated_at->diffForHumans()}}</small>
 				
 				@if(Auth::user()->id == $comment->user_id)
 				<hr>
 				<a href="/comments/{{$comment->id}}/edit">edit</a>
-				<a href="/comments/{{$comment->id}}/delete">delete</a>
+					<a href='' data-toggle="modal" data-target="#deleteComment">delete</a>
+					@include('modals.deleteComment')
 				@endif
 			</li>
 		@endforeach
@@ -58,7 +56,7 @@
 		<div class="col-lg-8">
 			{{ Form::open(['action' => ['CommentsController@store',$post->id], 'method' => 'POST']) }}
 			{{Form::label('comment','Add a comment:')}}
-			{{Form::textarea('comment',null, ['id' => 'article-ckeditor','class' => 'form-control', 'placeholder' => 'Write a comment...', 'required' => ''])}}
+			{{Form::textarea('comment',null, ['id' => 'tinyMce','class' => 'form-control', 'placeholder' => 'Write a comment...'])}}
 			{{Form::submit('submit',['class' =>' btn btn-primary'])}}
 			{{ Form::close() }}	
 		</div>
@@ -68,8 +66,11 @@
 @endsection
 
 @section ('scripts')
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'article-ckeditor' );
-    </script>
+  <script src="/vendor/tinymce/js/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({ 
+    selector:'#tinyMce',
+      plugins: "image",
+      menubar: false
+  });
+  </script>
 @endsection

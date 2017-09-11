@@ -16,7 +16,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- custom styles -->
     @yield('css') 
+    <!-- manifest -->
+    <link rel="manifest" href="mix-manifest.json">
 </head>
+
 <body>
     <div id="app">
     	@include('inc.navbar')
@@ -37,4 +40,5 @@
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts') 
 </body>
+
 </html>

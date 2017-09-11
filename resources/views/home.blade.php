@@ -29,12 +29,9 @@
                             <td>{{$post->title}}</td>
                             <td>{{$post->category->name}}</td>
                             <td><a href="/posts/{{$post->id}}/edit" class="btn btn">Edit</a></td>
-                            <td>    {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST','class' => 'pull-right'])!!}
-                            
-                                {{Form::hidden('_method' , 'DELETE')}}
-                                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-
-                                {!!Form::close()!!}
+                            <td> 
+                                <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#deletePost">Delete</button>
+                                @include('modals.deletePost')
                             </td>
                           </tr>
                           @endforeach

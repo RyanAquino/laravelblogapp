@@ -58,7 +58,6 @@ Route::patch('/edit','ProfileController@update');
 Route::get('/change_password', 'ProfileController@passwordIndex');
 Route::patch('/change_password', 'ProfileController@changePassword');
 });
-//END OF PROFILE
 
 //COMMENTS
 Route::prefix('comments')->group(function(){
@@ -68,7 +67,6 @@ Route::post('/{post_id}', 'CommentsController@store');
 Route::get('/{id}/edit', 'CommentsController@edit');
 Route::put('/{id}','CommentsController@update');
 	//DELETE
-Route::get('/{id}/delete','CommentsController@delete');
 Route::delete('/{id}','CommentsController@destroy');
 
 });
