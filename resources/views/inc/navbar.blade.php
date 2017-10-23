@@ -43,6 +43,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <img src="{{ Cloudder::show('avatars/' . Auth::user()->avatar)}}" alt="Profile Picture" class="img-circle" width="25" height="20">
                                     {{ Auth::user()->name . ' ' . Auth::user()->lname }}  
                                     <span class="caret"></span>
                                 </a>

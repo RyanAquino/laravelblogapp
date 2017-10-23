@@ -1,3 +1,4 @@
+/*profile picture of user in profile page*/
 #profileImage{
   height: 150px;
   width: 150px;
@@ -5,21 +6,28 @@
   border-radius: 50%;
 }
 
+/*post image size */
 #cover_image{
   height: 250px;
   width: 250px;
 }
 
+/*globe color of online user*/
 #onlineColor{
 	color: green;
 }
 
+/*color upon loading the names vue js*/
 [v-cloak] { 
 	display:none; 
 }
-/*html body {
-	background-color: red;
-}*/
+
+/*post title of blogs*/
 #postTitle{
 	text-decoration: none; 
 }
+
+/*for testing*/
+/*html body {
+  background-color: red;
+}*/
