@@ -3,12 +3,17 @@ services:
   #PHP Service
   app:
     build:
+      args:
+        user: ryan
+        uid: 1000
       context: .
       dockerfile: Dockerfile
     container_name: blogapp
     restart: unless-stopped
+    volumes:
+      - ./:/var/www/
     tty: true
-    working_dir: /var/www/html/
+    working_dir: /var/www/
  
   #Nginx Service
   nginx:
@@ -16,16 +21,19 @@ services:
     container_name: nginx
     restart: unless-stopped
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/
+      - ./nginx:/etc/nginx/conf.d
     # depends:
     #   - app
     #   - db
     tty: true
     ports:
-      - "80:80"
+      - "8000:80"
     expose:
       - "80"
+      - "8000"
   
+  # Database visualizer
   adminer:
     image: adminer:latest
     container_name: adminer_sql
