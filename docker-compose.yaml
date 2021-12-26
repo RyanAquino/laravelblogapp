@@ -1,0 +1,49 @@
+version: '2.0'
+services:
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blogapp
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/html/
+ 
+  #Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    # depends:
+    #   - app
+    #   - db
+    tty: true
+    ports:
+      - "80:80"
+    expose:
+      - "80"
+  
+  adminer:
+    image: adminer:latest
+    container_name: adminer_sql
+    restart: always
+    ports:
+      - 8080:8080
+
+  #MySQL Service
+  db:
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    tty: true
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_DATABASE: blogapp
+      MYSQL_ROOT_PASSWORD: admin
