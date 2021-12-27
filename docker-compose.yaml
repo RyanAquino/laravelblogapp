@@ -23,9 +23,6 @@ services:
     volumes:
       - ./:/var/www/
       - ./nginx:/etc/nginx/conf.d
-    # depends:
-    #   - app
-    #   - db
     tty: true
     ports:
       - "8000:80"
